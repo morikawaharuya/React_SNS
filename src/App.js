@@ -1,24 +1,35 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { indigo } from '@mui/material/colors';
+import Navbar from './compornents/Navbar';
+import ApiContextProvider from './context/ApiContext'
+import Main from './compornents/Main';
+
+const theme = createTheme({
+  palette:{
+    primary:indigo,
+    secondary:{
+      main:'#f44336'
+    },
+  },
+  typography:{
+    fontFamily:'Comic Neue',
+  }
+})
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ApiContextProvider>
+      <ThemeProvider theme={theme}>
+        <Navbar/>
+        <div className="badge">
+        <Main/>
+        </div>
+        
+      </ThemeProvider>
+    </ApiContextProvider>
+    
   );
 }
 
